@@ -1,0 +1,144 @@
+<div class="dashboard-container">
+  <!-- ✅ Loading Spinner - Shows while data loads -->
+  <div class="loading-container" *ngIf="isLoading()">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Loading your dashboard...</p>
+  </div>
+
+  <!-- ✅ Main Dashboard - Only shows when data is ready -->
+  <div *ngIf="dataReady() && !isLoading()">
+    <div class="welcome-section">
+      <h1>Welcome back, {{ currentUser?.fullName || currentUser?.username }}!</h1>
+      <p>Manage your accounts and transactions, {{ currentUser?.username }}</p>
+    </div>
+
+    <!-- No Accounts Message -->
+    <mat-card *ngIf="userAccounts().length === 0" class="no-accounts-card">
+      <mat-card-content>
+        <mat-icon>info</mat-icon>
+        <h2>No Accounts Found</h2>
+        <p>It looks like you don't have any accounts yet. Your accounts should have been created automatically during registration.</p>
+        <p>Please contact Savanna Bank support or try logging out and back in.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Dashboard Content - Only if we have accounts -->
+    <div *ngIf="userAccounts().length > 0">
+      <!-- Account Selector -->
+      <mat-card class="account-selector-card">
+        <mat-card-content>
+          <div class="selector-header">
+            <mat-icon>account_balance</mat-icon>
+            <span>Select Account</span>
+          </div>
+          <mat-form-field class="full-width">
+            <mat-label>Active Account</mat-label>
+            <mat-select [value]="selectedAccount()" (selectionChange)="onAccountChange($event.value)">
+              <mat-option *ngFor="let account of userAccounts()" [value]="account">
+                {{ account.accountType }} - {{ account.accountNumber }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Account Balance Card -->
+      <mat-card class="balance-card" *ngIf="selectedAccount()">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-chip [color]="getAccountTypeColor(selectedAccount()!.accountType)">
+              {{ selectedAccount()!.accountType }}
+            </mat-chip>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="balance-display">
+            <div class="balance-label">Current Balance</div>
+            <div class="balance-amount">KSh {{ selectedAccount()!.balance | number:'1.2-2' }}</div>
+            <div class="account-details">
+              <span>Account: {{ selectedAccount()!.accountNumber }}</span>
+              <span>Interest Rate: {{ selectedAccount()!.interestRate }}%</span>
+            </div>
+          </div>
+          <div class="total-balance">
+            <span>Total Balance (All Accounts):</span>
+            <span class="amount">KSh {{ getTotalBalance() | number:'1.2-2' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <button mat-raised-button color="primary" routerLink="/deposit" class="action-button">
+            <mat-icon>add_circle</mat-icon>
+            <span>Deposit</span>
+          </button>
+          <button mat-raised-button color="accent" routerLink="/withdraw" class="action-button">
+            <mat-icon>remove_circle</mat-icon>
+            <span>Withdraw</span>
+          </button>
+          <button mat-raised-button color="warn" routerLink="/transfer" class="action-button">
+            <mat-icon>swap_horiz</mat-icon>
+            <span>Transfer</span>
+          </button>
+          <button mat-raised-button routerLink="/transaction-history" class="action-button">
+            <mat-icon>history</mat-icon>
+            <span>History</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Daily Limits -->
+      <mat-card class="limits-card" *ngIf="getDailyLimit()">
+        <mat-card-header>
+          <mat-card-title>Daily Transaction Limits</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="limit-item">
+            <div class="limit-header">
+              <span>Withdrawal Limit</span>
+              <span class="limit-values">
+                KSh {{ getDailyLimit().withdrawalUsed | number:'1.2-2' }} /
+                KSh {{ getDailyLimit().withdrawalLimit | number:'1.2-2' }}
+              </span>
+            </div>
+            <mat-progress-bar 
+              mode="determinate" 
+              [value]="withdrawalProgress()"
+              [color]="withdrawalProgress() > 80 ? 'warn' : 'primary'">
+            </mat-progress-bar>
+            <div class="remaining">
+              Remaining: KSh {{ transactionService.getRemainingWithdrawalLimit() | number:'1.2-2' }}
+            </div>
+          </div>
+
+          <div class="limit-item">
+            <div class="limit-header">
+              <span>Transfer Limit</span>
+              <span class="limit-values">
+                KSh {{ getDailyLimit().transferUsed | number:'1.2-2' }} /
+                KSh {{ getDailyLimit().transferLimit | number:'1.2-2' }}
+              </span>
+            </div>
+            <mat-progress-bar 
+              mode="determinate" 
+              [value]="transferProgress()"
+              [color]="transferProgress() > 80 ? 'warn' : 'primary'">
+            </mat-progress-bar>
+            <div class="remaining">
+              Remaining: KSh {{ transactionService.getRemainingTransferLimit() | number:'1.2-2' }}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Mini Statement and Monthly Summary -->
+      <div class="statements-grid" *ngIf="selectedAccount()">
+        <app-mini-statement [accountId]="selectedAccount()!.id.toString()"></app-mini-statement>
+        <app-monthly-summary [accountId]="selectedAccount()!.id.toString()"></app-monthly-summary>
+      </div>
+    </div>
+  </div>
+</div>

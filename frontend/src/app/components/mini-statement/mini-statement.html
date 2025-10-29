@@ -1,0 +1,30 @@
+<mat-card class="mini-statement-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>receipt_long</mat-icon>
+      Recent Transactions
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="transactions-list" *ngIf="recentTransactions.length > 0; else noTransactions">
+      <div class="transaction-item" *ngFor="let transaction of recentTransactions">
+        <div class="transaction-icon" [ngClass]="getTransactionClass(transaction)">
+          <mat-icon>{{ getTransactionIcon(transaction.transactionType) }}</mat-icon>
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-type">{{ transaction.transactionType }}</div>
+          <div class="transaction-date">{{ transaction.date | date:'short' }}</div>
+        </div>
+        <div class="transaction-amount" [ngClass]="getTransactionClass(transaction)">
+          {{ getTransactionClass(transaction) === 'positive' ? '+' : '-' }}KSh {{ transaction.amount | number:'1.2-2' }}
+        </div>
+      </div>
+    </div>
+    <ng-template #noTransactions>
+      <div class="no-data">
+        <mat-icon>info</mat-icon>
+        <p>No recent transactions</p>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

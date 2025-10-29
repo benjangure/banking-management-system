@@ -1,0 +1,53 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="header-content">
+          <mat-icon class="bank-icon">account_balance</mat-icon>
+          <span>Register with Savanna Bank</span>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input matInput [(ngModel)]="fullName" required>
+        <mat-icon matPrefix>badge</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="username" required>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" required>
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [(ngModel)]="phoneNumber" required>
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" required>
+        <mat-icon matPrefix>lock</mat-icon>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="register()" class="full-width">
+        Register
+      </button>
+    </mat-card-content>
+    <mat-card-actions>
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </mat-card-actions>
+  </mat-card>
+</div>

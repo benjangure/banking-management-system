@@ -1,0 +1,83 @@
+<mat-card class="monthly-summary-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>calendar_today</mat-icon>
+      Monthly Summary - {{ currentMonth }}
+    </mat-card-title>
+    <div class="export-buttons">
+      <button mat-raised-button color="primary" (click)="downloadPDF()" matTooltip="Download PDF Report">
+        <mat-icon>picture_as_pdf</mat-icon>
+        PDF
+      </button>
+      <button mat-raised-button color="accent" (click)="downloadExcel()" matTooltip="Download Excel Report">
+        <mat-icon>table_chart</mat-icon>
+        Excel
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div *ngIf="isLoading()" class="loading-spinner">
+      <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+      <p>Loading monthly summary...</p>
+    </div>
+
+    <div *ngIf="!isLoading()" class="summary-grid">
+      <div class="summary-item deposits">
+        <div class="summary-icon">
+          <mat-icon>add_circle</mat-icon>
+        </div>
+        <div class="summary-details">
+          <div class="summary-label">Total Deposits</div>
+          <div class="summary-value">KSh {{ summary().totalDeposits | number:'1.2-2' }}</div>
+          <div class="summary-change" [ngClass]="getChangeClass(summary().depositChange)">
+            <mat-icon>{{ getChangeIcon(summary().depositChange) }}</mat-icon>
+            {{ summary().depositChange > 0 ? '+' : '' }}{{ summary().depositChange | number:'1.1-1' }}%
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-item withdrawals">
+        <div class="summary-icon">
+          <mat-icon>remove_circle</mat-icon>
+        </div>
+        <div class="summary-details">
+          <div class="summary-label">Total Withdrawals</div>
+          <div class="summary-value">KSh {{ summary().totalWithdrawals | number:'1.2-2' }}</div>
+          <div class="summary-change" [ngClass]="getChangeClass(summary().withdrawalChange)">
+            <mat-icon>{{ getChangeIcon(summary().withdrawalChange) }}</mat-icon>
+            {{ summary().withdrawalChange > 0 ? '+' : '' }}{{ summary().withdrawalChange | number:'1.1-1' }}%
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-item transfers">
+        <div class="summary-icon">
+          <mat-icon>swap_horiz</mat-icon>
+        </div>
+        <div class="summary-details">
+          <div class="summary-label">Total Transfers</div>
+          <div class="summary-value">KSh {{ summary().totalTransfers | number:'1.2-2' }}</div>
+          <div class="summary-change" [ngClass]="getChangeClass(summary().transferChange)">
+            <mat-icon>{{ getChangeIcon(summary().transferChange) }}</mat-icon>
+            {{ summary().transferChange > 0 ? '+' : '' }}{{ summary().transferChange | number:'1.1-1' }}%
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-item transactions">
+        <div class="summary-icon">
+          <mat-icon>receipt</mat-icon>
+        </div>
+        <div class="summary-details">
+          <div class="summary-label">Total Transactions</div>
+          <div class="summary-value">{{ summary().transactionCount }}</div>
+          <div class="summary-change" [ngClass]="getChangeClass(summary().transactionChange)">
+            <mat-icon>{{ getChangeIcon(summary().transactionChange) }}</mat-icon>
+            {{ summary().transactionChange > 0 ? '+' : '' }}{{ summary().transactionChange | number:'1.1-1' }}%
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

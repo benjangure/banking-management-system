@@ -1,0 +1,52 @@
+<div class="deposit-container">
+  <mat-card class="deposit-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>add_circle</mat-icon>
+        Deposit Money
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Select Account</mat-label>
+        <mat-select [(ngModel)]="selectedAccount" [disabled]="isLoading || isInitializing">
+          <mat-option *ngFor="let account of userAccounts" [value]="account">
+            {{ account.accountType }} - {{ account.accountNumber }} (KSh {{ account.balance | number:'1.2-2' }})
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="isInitializing">Loading accounts...</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" min="10" step="0.01" [disabled]="isLoading">
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Description (Optional)</mat-label>
+        <textarea matInput [(ngModel)]="description" rows="3" [disabled]="isLoading"></textarea>
+      </mat-form-field>
+
+      <!-- Info message - Shows BEFORE validation -->
+      <div class="info-box" *ngIf="!showValidation">
+        <mat-icon>info</mat-icon>
+        <span>Minimum deposit amount is KSh 1,000</span>
+      </div>
+
+      <!-- Warning message - Shows AFTER validation fails -->
+      <div class="warning-box" *ngIf="shouldShowError()">
+        <mat-icon>warning</mat-icon>
+        <span>Please enter an amount of at least KSh 1,000</span>
+      </div>
+
+      <div class="button-group">
+        <button mat-button routerLink="/dashboard" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="primary" (click)="deposit()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Deposit KSh {{ amount | number:'1.2-2' }}</span>
+          <span *ngIf="isLoading">Processing...</span>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

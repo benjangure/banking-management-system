@@ -1,0 +1,129 @@
+.account-management-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #333;
+}
+
+.header p {
+  margin: 8px 0 0 0;
+  color: #666;
+}
+
+.summary-card {
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.summary-content {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-item .label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.summary-item .value {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.account-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #667eea;
+}
+
+.account-number {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.account-balance {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.account-details {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+.detail-item mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+mat-card-actions {
+  padding: 16px;
+  margin-top: auto;
+}
+
+mat-card-actions button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .accounts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+}

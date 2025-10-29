@@ -1,0 +1,88 @@
+.mini-statement-card {
+  height: 100%;
+}
+
+mat-card-header {
+  margin-bottom: 16px;
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction-icon.positive {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.transaction-icon.negative {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-type {
+  font-weight: 500;
+  color: #333;
+}
+
+.transaction-date {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.transaction-amount.positive {
+  color: #4caf50;
+}
+
+.transaction-amount.negative {
+  color: #f44336;
+}
+
+.no-data {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+}
+
+.no-data mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}

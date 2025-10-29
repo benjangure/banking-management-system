@@ -1,0 +1,80 @@
+<div class="transfer-container">
+  <mat-card class="transfer-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>swap_horiz</mat-icon>
+        Transfer Money
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>From Account</mat-label>
+        <mat-select [(ngModel)]="selectedAccount" [disabled]="isLoading || isInitializing">
+          <mat-option *ngFor="let account of userAccounts" [value]="account">
+            {{ account.accountType }} - {{ account.accountNumber }} (KSh {{ account.balance | number:'1.2-2' }})
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="isInitializing">Loading accounts...</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" *ngIf="beneficiaries.length > 0">
+        <mat-label>Select Beneficiary (Optional)</mat-label>
+        <mat-select [(ngModel)]="selectedBeneficiary" (selectionChange)="onBeneficiarySelect()" [disabled]="isLoading">
+          <mat-option [value]="null">-- Enter Manually --</mat-option>
+          <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">
+            {{ beneficiary.nickname }} - {{ beneficiary.accountNumber }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>To Account Number</mat-label>
+        <input matInput [(ngModel)]="toAccountNumber" required [disabled]="isLoading">
+        <mat-icon matSuffix>account_balance</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" min="10" step="0.01" [disabled]="isLoading">
+        <span matPrefix>$</span>
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="description" rows="3" [disabled]="isLoading"></textarea>
+      </mat-form-field>
+
+      <!-- Info messages - Shows BEFORE validation -->
+      <div class="info-box balance" *ngIf="selectedAccount && !showValidation">
+        <mat-icon>account_balance_wallet</mat-icon>
+        <span>Available Balance: KSh {{ selectedAccount.balance | number:'1.2-2' }}</span>
+      </div>
+
+      <div class="info-box limit" *ngIf="!showValidation">
+        <mat-icon>info</mat-icon>
+        <span>Daily Transfer Limit Remaining: KSh {{ getRemainingLimit() | number:'1.2-2' }}</span>
+      </div>
+
+      <!-- Warning for insufficient balance - Shows AFTER validation -->
+      <div class="warning-box" *ngIf="hasInsufficientBalance()">
+        <mat-icon>warning</mat-icon>
+        <span>Insufficient balance. Available: KSh {{ selectedAccount?.balance | number:'1.2-2' }}</span>
+      </div>
+
+      <!-- Warning for invalid input - Shows AFTER validation -->
+      <div class="warning-box" *ngIf="shouldShowError()">
+        <mat-icon>warning</mat-icon>
+        <span>Please enter a valid amount (minimum $10) and recipient account number</span>
+      </div>
+
+      <div class="button-group">
+        <button mat-button routerLink="/dashboard" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="warn" (click)="transfer()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Transfer KSh {{ amount | number:'1.2-2' }}</span>
+          <span *ngIf="isLoading">Processing...</span>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

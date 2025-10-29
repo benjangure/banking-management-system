@@ -1,0 +1,137 @@
+/* Add these styles to your component CSS files */
+/* deposit.css, withdraw.css, and transfer.css */
+
+/* ✅ NEW: Loading container styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 20px;
+}
+
+.loading-container p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Info box - Blue color for helpful information */
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  border-radius: 4px;
+  color: #1565c0;
+}
+
+.info-box mat-icon {
+  color: #2196f3;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.info-box span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Warning box - Orange/Red color for validation errors */
+.warning-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+  border-radius: 4px;
+  color: #e65100;
+}
+
+.warning-box mat-icon {
+  color: #ff9800;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.warning-box span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Balance info box (specific for transfer/withdraw) */
+.info-box.balance {
+  background-color: #e8f5e9;
+  border-left-color: #4caf50;
+  color: #2e7d32;
+}
+
+.info-box.balance mat-icon {
+  color: #4caf50;
+}
+
+/* Limit info box */
+.info-box.limit {
+  background-color: #e3f2fd;
+  border-left-color: #2196f3;
+  color: #1565c0;
+}
+
+.info-box.limit mat-icon {
+  color: #2196f3;
+}
+
+/* Full width form fields */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Container and card styling */
+.deposit-container,
+.withdraw-container,
+.transfer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  padding: 20px;
+}
+
+.deposit-card,
+.withdraw-card,
+.transfer-card {
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+mat-card-header mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}

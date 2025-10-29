@@ -1,0 +1,345 @@
+.monthly-summary-card {
+  margin: 16px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: white;
+}
+
+.monthly-summary-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+/* Header Styles */
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+mat-card-title mat-icon {
+  color: #3498db;
+}
+
+/* Enhanced Download Buttons */
+.export-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.download-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  min-width: 140px !important;
+  justify-content: center !important;
+  font-size: 14px !important;
+}
+
+.download-btn:hover:not([disabled]) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.pdf-download {
+  background: linear-gradient(135deg, #d32f2f, #f44336) !important;
+  color: white !important;
+}
+
+.excel-download {
+  background: linear-gradient(135deg, #388e3c, #4caf50) !important;
+  color: white !important;
+}
+
+.download-btn[disabled] {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.download-btn mat-spinner {
+  margin-right: 8px;
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+  color: #666;
+  text-align: center;
+}
+
+.loading-state p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Summary Grid - Fixed Layout */
+.summary-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 16px !important;
+  padding: 24px !important;
+}
+
+.summary-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  background: #f8f9fa !important;
+  border: 1px solid #e9ecef !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.summary-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.summary-item:hover::before {
+  width: 6px;
+}
+
+.summary-item:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+  background: white !important;
+}
+
+.summary-item.deposits::before {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+}
+
+.summary-item.withdrawals::before {
+  background: linear-gradient(135deg, #f44336, #ef5350);
+}
+
+.summary-item.transfers::before {
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+}
+
+.summary-item.transactions::before {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  flex-shrink: 0;
+}
+
+.summary-item.deposits .summary-icon {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+}
+
+.summary-item.withdrawals .summary-icon {
+  background: linear-gradient(135deg, #f44336, #ef5350);
+}
+
+.summary-item.transfers .summary-icon {
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+}
+
+.summary-item.transactions .summary-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+.summary-details {
+  flex: 1;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* No Data State */
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.no-data mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #bdc3c7;
+}
+
+/* Last Updated Section */
+.last-updated {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  border-top: 1px solid #e0e0e0;
+  background: #f8f9fa;
+}
+
+.last-updated small {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.last-updated button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.last-updated mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 16px;
+  text-align: center;
+  color: #f44336;
+}
+
+.error-state mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+/* Snackbar Success Styling */
+::ng-deep .success-snackbar {
+  background: #4caf50 !important;
+  color: white !important;
+}
+
+::ng-deep .success-snackbar .mat-simple-snackbar-action {
+  color: white !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .summary-grid {
+    grid-template-columns: 1fr !important;
+    padding: 16px !important;
+  }
+  
+  mat-card-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .export-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .download-btn {
+    min-width: 120px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .export-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .download-btn {
+    width: 100%;
+  }
+  
+  .summary-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .last-updated {
+    justify-content: center;
+  }
+  
+  .last-updated small {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Ensure Material icons are properly sized */
+mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/* Force styles to override any conflicting ones */
+:host {
+  display: block !important;
+}
+
+.monthly-summary-card mat-card-content {
+  padding: 0 !important;
+}

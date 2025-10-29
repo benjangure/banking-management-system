@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  <span class="logo">🏦 Savanna Bank</span>
+  <span class="spacer"></span>
+  
+  <div *ngIf="authService.currentUser(); else loginLinks">
+    <button mat-button routerLink="/dashboard">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </button>
+    <button mat-button [matMenuTriggerFor]="transactionMenu">
+      <mat-icon>account_balance_wallet</mat-icon>
+      Transactions
+    </button>
+    <mat-menu #transactionMenu="matMenu">
+      <button mat-menu-item routerLink="/deposit">
+        <mat-icon>add_circle</mat-icon>
+        Deposit
+      </button>
+      <button mat-menu-item routerLink="/withdraw">
+        <mat-icon>remove_circle</mat-icon>
+        Withdraw
+      </button>
+      <button mat-menu-item routerLink="/transfer">
+        <mat-icon>swap_horiz</mat-icon>
+        Transfer
+      </button>
+    </mat-menu>
+    
+    <button mat-button routerLink="/transaction-history">
+      <mat-icon>history</mat-icon>
+      History
+    </button>
+    
+    <button mat-button routerLink="/account-management">
+      <mat-icon>account_balance</mat-icon>
+      Accounts
+    </button>
+    
+    <button mat-button routerLink="/beneficiary-management">
+      <mat-icon>people</mat-icon>
+      Beneficiaries
+    </button>
+    
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </div>
+  
+  <ng-template #loginLinks>
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/register">Register</button>
+  </ng-template>
+</mat-toolbar>

@@ -1,0 +1,100 @@
+.history-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.history-card {
+  width: 100%;
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filter-field {
+  width: 100%;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.transaction-table {
+  width: 100%;
+}
+
+.type-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.type-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.type-icon.deposit {
+  color: #4caf50;
+}
+
+.type-icon.withdrawal {
+  color: #f44336;
+}
+
+.type-icon.transfer {
+  color: #2196f3;
+}
+
+.description-cell {
+  line-height: 1.4;
+}
+
+.transaction-id {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.amount {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.amount.positive {
+  color: #4caf50;
+}
+
+.amount.negative {
+  color: #f44336;
+}
+
+.no-data {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+}
+
+.no-data mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
